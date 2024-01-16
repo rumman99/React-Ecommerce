@@ -1,0 +1,30 @@
+.header img{
+    width: 18%;
+}
+
+.header{
+    text-align: center;
+}
+
+nav a{
+    text-decoration: none;
+    color: white;
+    padding: 9px 5px;
+    margin-left: 50px;
+}
+
+.header nav{
+    text-decoration: none;
+    background-color: rgb(129, 177, 33);
+    line-height: 40px;
+    font-size: 20px;
+    text-align: left;
+}
+
+nav a:hover{
+    background-color: rgb(106,90,205);
+}
+
+nav .active{
+    color: blue;
+}
