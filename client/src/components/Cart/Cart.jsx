@@ -6,11 +6,10 @@ const Cart = (props) => {
     //     let perProduct=cartItems[i].price;
     //     cartPrice+=perProduct;
     // }
-    const cartPrice= cartItems.reduce((cartPrice, perProduct) => cartPrice+perProduct.price*perProduct.quantity, 0);
-    
+    const cartPrice= cartItems.reduce((cartPrice, perProduct) => cartPrice+perProduct.price*perProduct.quantity || 1, 0);
     
     // cartPrice*quantity;
-    // console.log(cartItems);
+    // console.log(cartPrice);
 
 let shipping= 0;
 if(cartPrice>100){
@@ -35,7 +34,7 @@ const numberConvert= (string)=>{
 
 // Product Quantity on Cart Show
 const allProduct= cartItems;
-const getQuantity= allProduct.map(pd=>pd.quantity);
+const getQuantity= allProduct.map(pd=>pd.quantity || 1);
 const quantitySum= getQuantity.reduce((initialpd, addedpd)=>initialpd+addedpd,0);
 
     return (

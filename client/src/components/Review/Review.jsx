@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { clearLocalShoppingCart, getDatabaseCart, removeFromDatabaseCart } from "../../utilities/databaseManager";
-import fakeData from "../../fakeData";
 import Revieworder from "../Revieworder/Revieworder";
 import Cart from "../Cart/Cart";
 import { Link, useNavigate } from "react-router-dom";
@@ -12,12 +11,21 @@ const Review = () => {
     useEffect(()=>{
         const saveOrder= getDatabaseCart();
         const productkey= Object.keys(saveOrder)
-        const findProduct= productkey.map(keys => {
-            const matchProduct= fakeData.find(pd => pd.key===keys);
-            matchProduct.quantity= saveOrder[keys]; //Added Value by asking key of an array
-            return matchProduct;
-        });
-        setcartItem(findProduct);
+
+        fetch('http://localhost:3333/productsReview', {
+            method: "POST",
+            body: JSON.stringify(productkey),
+            headers: {"Content-Type":"application/json"}
+        })
+        .then(res=> res.json())
+        .then(result => setcartItem(result))
+
+        // const findProduct= productkey.map(keys => {
+        //     const matchProduct= fakeData.find(pd => pd.key===keys);
+        //     matchProduct.quantity= saveOrder[keys]; //Added Value by asking key of an array
+        //     return matchProduct;
+        // });
+        // setcartItem(findProduct);
     },[])
 
     const removeProduct= (pdkey)=>{
@@ -35,7 +43,7 @@ const Review = () => {
 
 
     const handlePlaceOrder=()=>{
-        clearLocalShoppingCart()
+        // clearLocalShoppingCart()
         navigate('/confirm-order');
     }
     

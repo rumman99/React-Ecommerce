@@ -1,10 +1,13 @@
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import giffy from '../../images/giphy.gif';
 import { useForm } from 'react-hook-form';
 import { userContext } from '../../App';
+import { clearLocalShoppingCart, getDatabaseCart } from '../../utilities/databaseManager';
 
 
 const ConfirmOrder = () => {
+    const [userLogin]= useContext(userContext);
+
     const errorText= {
         color: 'red'
     }
@@ -14,10 +17,21 @@ const ConfirmOrder = () => {
         watch,
         formState: { errors },
       } = useForm()
-      const onSubmit = (data) => console.log(data)
+      const onSubmit = (data) => {
+//// Send Order Details to Databse ///
+        const saveCartData= getDatabaseCart();
+        console.log(saveCartData);
+        const confirmedOrderDetails={user:{...userLogin}, products: saveCartData, userDetails: data, orderTime: new Date().toDateString("dd/MM/yyyy")}
+        fetch('http://localhost:3333/confirmOrder', {
+            method: "POST",
+            body: JSON.stringify(confirmedOrderDetails),
+            headers: {'Content-Type': 'application/json'}
+          })
+        clearLocalShoppingCart();
+        alert('Your Order Confirmed.... We will Contact with You')
+      }
     console.log(watch("example"))
-
-    const [userLogin]= useContext(userContext);
+    
 
     return (
         <>
@@ -26,6 +40,8 @@ const ConfirmOrder = () => {
             <input defaultValue={userLogin.displayName} {...register("name", { required: true })} placeholder='Name' />
             <br/>
             <input defaultValue={userLogin.email} {...register("email", { required: true })} placeholder='Email' />
+            <br/>
+            <input defaultValue={userLogin.phone} {...register("phone", { required: true })} placeholder='Phone' />
             <br/>
             <input {...register("address", { required: true })} placeholder='Address' />
             <br/>
@@ -36,7 +52,9 @@ const ConfirmOrder = () => {
             <br/>
             {errors.email && <span style={errorText}>Email field is required</span>}
             <br/>
-            <input type="submit" />
+            {errors.phone && <span style={errorText}>Phone field is required</span>}
+            <br/>
+            <input type="submit" value='Confirm Your Order' />
             </form>
         </div>
 

@@ -25,30 +25,49 @@ async function run() {
     await client.connect();
     // Send a ping to confirm a successful connection
     await client.db("am-mart-DB").command({ ping: 1 });
-    const databaseCollection= client.db("am-mart-DB").collection("products");
+    const productCollection= client.db("am-mart-DB").collection("products");
+    const orderCollection= client.db("am-mart-DB").collection("orders");
+
     console.log("You successfully connected to MongoDB!");
 
     ////// View All Product on UI
         app.get('/', (req, res)=>{
-            databaseCollection.find({}).toArray()
+            productCollection.find({}).toArray()
             .then(result => res.send(result))
             .catch(err => console.log(err))
         });
 
     ////// View Single ProductInfo on UI by Key
-    app.get('/product/:key', (req, res)=>{
-        databaseCollection.find({key: req.params.key}).toArray()
-        .then(result => res.send(result))
-        .catch(err => console.log(err))
-    });
+        app.get('/product/:key', (req, res)=>{
+            productCollection.find({key: req.params.key}).toArray()
+            .then(result => res.send(result))
+            .catch(err => console.log(err))
+       });
 
     ///// Create Many Post
         app.post('/addProducts', (req, res)=>{
             const products= req.body;
-            databaseCollection.insertMany(products)
+            productCollection.insertMany(products)
             .then(result => console.log("Insert To DB"))
             .catch(err => console.log(err))
         });
+
+    ///// View Multiple Product to Review based on Key///
+        app.post('/productsReview', (req, res)=>{
+            const reviewProductsKeys= req.body
+            productCollection.find({key: {$in: reviewProductsKeys}}).toArray()
+            .then(result => res.send(result))
+            .catch(err => console.log(err))
+          })
+
+    ////// Add Order Details to Orders Collection/////
+        app.post('/confirmOrder', (req, res)=>{
+          const orderDetails= req.body;
+          orderCollection.insertOne(orderDetails)
+          .then(result => res.send(result))
+          .catch(err => console.log(err))
+        });
+
   } finally {
     // Ensures that the client will close when you finish/error
     // await client.close();

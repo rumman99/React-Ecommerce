@@ -18,7 +18,14 @@ function Login() {
     signInWithPopup(auth, googleProvider)
     .then(res=>{
       const {displayName, email, photoURL}= res.user;
-      setUser({isLogin: true, name: displayName, email:email, photo:photoURL})
+      const user= {name:displayName, email:email, photo:photoURL, isLogin: true};
+      const userField= {...user};
+      userField.userError='';
+      userField.success= true;
+      setUser(userField);
+      // console.log('your name', userCredential.user);
+      setUserLogin(userField);
+      navigate(from, { replace: true });
     })
     .catch(err=>{
       console.log(err);
@@ -45,7 +52,7 @@ function Login() {
     .then((result) => {
       // The signed-in user info.
       const user = result.user;
-      console.log('fb user', user);
+      // console.log('fb user', user);
       // This gives you a Facebook Access Token. You can use it to access the Facebook API.
       const credential = FacebookAuthProvider.credentialFromResult(result);
       const accessToken = credential.accessToken;
@@ -124,7 +131,7 @@ const handleSubmit= (event)=>{
     userField.userError='';
     userField.success= true;
     setUser(userField);
-    console.log('your name', userCredential.user);
+    // console.log('your name', userCredential.user);
     setUserLogin(userField);
     navigate(from, { replace: true });
   })

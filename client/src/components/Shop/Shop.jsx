@@ -24,15 +24,24 @@ const Shop = () => {
     useEffect(()=>{
         const getProductDB= getDatabaseCart();
         const productKey= Object.keys(getProductDB);
-        if(product.length > 0){
-            const allProduct= productKey.map(productKey => {
-                const matchProduct= product.find(pd => pd.key === productKey);
-                matchProduct.quantity= getProductDB[productKey];
-                return matchProduct;
-            })
-            setCart(allProduct)
-        }
-    }, [product]);
+
+        fetch('http://localhost:3333/productsReview', {
+            method: "POST",
+            body: JSON.stringify(productKey),
+            headers: {"Content-Type":"application/json"}
+        })
+        .then(res=> res.json())
+        .then(result => setCart(result))
+
+        // if(product.length > 0){
+        //     const allProduct= productKey.map(productKey => {
+        //         const matchProduct= product.find(pd => pd.key === productKey);
+        //         matchProduct.quantity= getProductDB[productKey];
+        //         return matchProduct;
+        //     })
+        //     setCart(allProduct)
+        // }
+    }, []);
 
     const addCartButton= (pd)=>{
         const addedProduct= cart.find(product => product.key === pd.key);
