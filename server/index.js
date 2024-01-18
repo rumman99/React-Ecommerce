@@ -17,14 +17,14 @@ const client = new MongoClient(uri, {
 const app= express();
 app.use(cors(
 	    {
-		origin: ["https://am-mart-ecommerce.vercel.app"],
+		origin: ["https://am-mart.vercel.app"],
 		method: ["POST", "GET"],
 		credentials: true
 	    }
 ));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cors());
+
 
 async function run() {
   try {
