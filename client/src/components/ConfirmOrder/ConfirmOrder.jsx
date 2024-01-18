@@ -22,7 +22,7 @@ const ConfirmOrder = () => {
         const saveCartData= getDatabaseCart();
         console.log(saveCartData);
         const confirmedOrderDetails={user:{...userLogin}, products: saveCartData, userDetails: data, orderTime: new Date().toDateString("dd/MM/yyyy")}
-        fetch('http://localhost:3333/confirmOrder', {
+        fetch('http://am-mart-ecommerce.vercel.app/confirmOrder', {
             method: "POST",
             body: JSON.stringify(confirmedOrderDetails),
             headers: {'Content-Type': 'application/json'}

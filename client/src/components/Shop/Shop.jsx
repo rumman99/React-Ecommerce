@@ -11,7 +11,7 @@ const Shop = () => {
 
 //Show All Product From Database
     useEffect(()=>{
-        fetch('http://localhost:3333/')
+        fetch('http://am-mart-ecommerce.vercel.app/')
         .then(data => data.json())
         .then(result => setProduct(result))
         .catch(err => console.log(err))
@@ -25,7 +25,7 @@ const Shop = () => {
         const getProductDB= getDatabaseCart();
         const productKey= Object.keys(getProductDB);
 
-        fetch('http://localhost:3333/productsReview', {
+        fetch('http://am-mart-ecommerce.vercel.app/productsReview', {
             method: "POST",
             body: JSON.stringify(productKey),
             headers: {"Content-Type":"application/json"}
