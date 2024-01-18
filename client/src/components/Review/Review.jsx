@@ -12,7 +12,7 @@ const Review = () => {
         const saveOrder= getDatabaseCart();
         const productkey= Object.keys(saveOrder)
 
-        fetch('http://am-mart-ecommerce.vercel.app/productsReview', {
+        fetch('https://am-mart-ecommerce.vercel.app/productsReview', {
             method: "POST",
             body: JSON.stringify(productkey),
             headers: {"Content-Type":"application/json"}
