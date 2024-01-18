@@ -17,7 +17,7 @@ const client = new MongoClient(uri, {
 const app= express();
 app.use(cors(
 	    {
-		origin: ["https://am-mart.vercel.app"],
+		origin: ["https://five-star-hotel.onrender.com"],
 		method: ["POST", "GET"],
 		credentials: true
 	    }
