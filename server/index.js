@@ -83,4 +83,4 @@ async function run() {
 run().catch(console.dir);
 
 
-app.listen(3333, console.log("Listening to PORT 3333"));
+app.listen(process.env.PORT || 3333, console.log("Listening to PORT 3333"));
