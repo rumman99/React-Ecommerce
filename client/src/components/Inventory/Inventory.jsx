@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 const Inventory = () => {
     const productsData={};
     const handleAddProducts=()=>{
-        fetch('https://https:/am-mart-server.onrender.com/addProducts', {
+        fetch('https://am-mart-server.onrender.com/addProducts', {
             method: "POST",
             body: JSON.stringify(productsData),
             headers: {'Content-Type': 'application/json'}

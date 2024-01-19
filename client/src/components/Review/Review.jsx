@@ -12,7 +12,7 @@ const Review = () => {
         const saveOrder= getDatabaseCart();
         const productkey= Object.keys(saveOrder)
 
-        fetch('https://https:/am-mart-server.onrender.com/productsReview', {
+        fetch('https://am-mart-server.onrender.com/productsReview', {
             method: "POST",
             body: JSON.stringify(productkey),
             headers: {"Content-Type":"application/json"}

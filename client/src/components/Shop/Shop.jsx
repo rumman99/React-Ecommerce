@@ -11,7 +11,7 @@ const Shop = () => {
 
 //Show All Product From Database
     useEffect(()=>{
-        fetch('https://https:/am-mart-server.onrender.com/')
+        fetch('https://am-mart-server.onrender.com/')
         .then(data => data.json())
         .then(result => setProduct(result))
         .catch(err => console.log(err))
@@ -25,7 +25,7 @@ const Shop = () => {
         const getProductDB= getDatabaseCart();
         const productKey= Object.keys(getProductDB);
 
-        fetch('https://https:/am-mart-server.onrender.com/productsReview', {
+        fetch('https://am-mart-server.onrender.com/productsReview', {
             method: "POST",
             body: JSON.stringify(productKey),
             headers: {"Content-Type":"application/json"}
