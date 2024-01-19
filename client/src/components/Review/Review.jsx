@@ -12,7 +12,7 @@ const Review = () => {
         const saveOrder= getDatabaseCart();
         const productkey= Object.keys(saveOrder)
 
-        fetch('https://am-mart-ecommerce-production.up.railway.app/productsReview', {
+        fetch('https://localhost:3333/productsReview', {
             method: "POST",
             body: JSON.stringify(productkey),
             headers: {"Content-Type":"application/json"}

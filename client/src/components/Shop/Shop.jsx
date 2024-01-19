@@ -11,7 +11,7 @@ const Shop = () => {
 
 //Show All Product From Database
     useEffect(()=>{
-        fetch('https://am-mart-ecommerce-production.up.railway.app/')
+        fetch('https://localhost:3333/')
         .then(data => data.json())
         .then(result => setProduct(result))
         .catch(err => console.log(err))
@@ -25,7 +25,7 @@ const Shop = () => {
         const getProductDB= getDatabaseCart();
         const productKey= Object.keys(getProductDB);
 
-        fetch('https://am-mart-ecommerce-production.up.railway.app/productsReview', {
+        fetch('https://localhost:3333/productsReview', {
             method: "POST",
             body: JSON.stringify(productKey),
             headers: {"Content-Type":"application/json"}
