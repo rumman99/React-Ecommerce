@@ -8,7 +8,7 @@ const Productinfo = () => {
     const [productDetails, setProductDetails]= useState([]);
 
     useEffect(()=>{
-        fetch(`https://am-mart-ecommerce.vercel.app/product/${productkey}`)
+        fetch(`https://https:/am-mart-server.onrender.com/product/${productkey}`)
         .then(data => data.json())
         .then(result => setProductDetails(result))
 
