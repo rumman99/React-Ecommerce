@@ -8,7 +8,7 @@ const Productinfo = () => {
     const [productDetails, setProductDetails]= useState([]);
 
     useEffect(()=>{
-        fetch(`https://am-mart-server.onrender.com/product/${productkey}`)
+        fetch(`https://am-mart-ecommerce-production.up.railway.app/product/${productkey}`)
         .then(data => data.json())
         .then(result => setProductDetails(result))
 
