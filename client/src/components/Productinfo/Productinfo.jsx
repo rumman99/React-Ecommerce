@@ -8,7 +8,7 @@ const Productinfo = () => {
     const [productDetails, setProductDetails]= useState([]);
 
     useEffect(()=>{
-        fetch(`https://localhost:3333/product/${productkey}`)
+        fetch(`https://am-mart-ecommerce-production.up.railway.app/product/${productkey}`)
         .then(data => data.json())
         .then(result => setProductDetails(result))
 
